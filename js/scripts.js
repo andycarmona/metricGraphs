@@ -75,25 +75,26 @@ function ShowGrid() {
                 plotterData.push(e.data);
                 ShowPointGraph();
                 // on success
-                //e.success(e.data);
+                e.success(e.data);
                 // on failure
                 // e.error("XHR response", "status code", "create error message");
             },
             update: function (e) {
                 // locate item in original datasource and update it
                 plotterData[getIndexById(e.data.Id)] = e.data;
-              
+                ShowPointGraph();
                 // on success
                 e.success()
-            
+
                 // on failure
-                e.error("XHR response", "status code", "update error message");
+                //e.error("XHR response", "status code", "update error message");
             },
             destroy: function (e) {
                 // locate item in original datasource and remove it
-                //sampleData.splice(getIndexById(e.data.ProductID), 1);
+                plotterData.splice(getIndexById(e.data.Id), 1);
+                ShowPointGraph();
                 // on success
-                //e.success();
+                e.success();
                 // on failure
                 //e.error("XHR response", "status code", "error message");
             }
@@ -105,26 +106,27 @@ function ShowGrid() {
         pageSize: 10,
         batch: false,
         schema: {
-        model: {
-        fields: {
-            x_value: { type: "number", validation: { required: true, min: 1 } },
-            y_value: { type: "number", validation: { required: true, min: 1 } }
-    }
-    }
-    }
+            model: {
+                id: "Id",
+                fields: {
+                    Id: { editable: false, nullable: true },
+                    x_value: { type: "number", validation: { required: true, min: 1 } },
+                    y_value: { type: "number", validation: { required: true, min: 1 } }
+                }
+            }
+        }
     });
-   // localDataSource.data(newPlotterData);
+    // localDataSource.data(newPlotterData);
     $("#grid").kendoGrid({
         dataSource: localDataSource,
         toolbar: ["create"],
-        height: 200,
         scrollable: true,
         columns: [
               { field: "x_value", title: "X Value" },
               { field: "y_value", title: "Y value" },
               { command: ["edit", "destroy"], title: "&nbsp;", width: "200px" }
         ],
-        editable:"inline"
+        editable: "inline"
     });
 }
 function ShowBarData() {
