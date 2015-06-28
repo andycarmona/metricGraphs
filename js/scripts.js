@@ -13,6 +13,7 @@ var bar_data = [
     { 'label': 'and again', 'value': 4.2, 'baseline': 10.2, 'prediction': 3 },
     { 'label': 'and sss', 'value': 4.2, 'baseline': 10.2, 'prediction': 3 }
 ];
+
 var functionGraph = {
     title: "Singleton",
     description: "Handling a solitary data point.",
@@ -24,13 +25,13 @@ var functionGraph = {
         var pf = d3.formatPrefix(f);
         return Math.round(pf.scale(f)) + pf.symbol;
     },
-    x_accessor: 'x_value',
-    y_accessor: 'y_value'
+    x_accessor: 'xValue',
+    y_accessor: 'yValue'
 }
 
 
 var plotterData = [
-            { 'Id': 1, 'x_value': 100, 'y_value': 98 }];
+            { 'Id': 1, 'xValue': 4, 'yValue': 8 }];
 
 var sampleDataNextID = plotterData.length + 1;
 var localDataSource = new kendo.data.DataSource({ data: plotterData });
@@ -39,7 +40,7 @@ $(document).ready(function () {
     graphWidth = $(window).width();
     grapHeight = $(window).height();
     ShowGraphic();
-    ShowPointGraph();
+    ShowPointGraph(plotterData);
     ShowPlotGraph();
     ShowHistogram();
     ShowBarData();
@@ -52,8 +53,8 @@ function getIndexById(id) {
     var idx,
         l = plotterData.length;
 
-    for (var j; j < l; j++) {
-        if (plotterData[j].ID == id) {
+    for (var j=0; j < l; j++) {
+        if (plotterData[j].Id == id) {
             return j;
         }
     }
@@ -69,20 +70,31 @@ function ShowGrid() {
                 //e.error("XHR response", "status code", "error message");
             },
             create: function (e) {
+			
                 // assign an ID to the new item
                 e.data.Id = sampleDataNextID++;
                 // save data item to the original datasource
+              
+                e.data.yValue = e.data.xValue * 2;
                 plotterData.push(e.data);
-                ShowPointGraph();
+                ShowPointGraph(plotterData);
                 // on success
                 e.success(e.data);
                 // on failure
                 // e.error("XHR response", "status code", "create error message");
             },
             update: function (e) {
+			$('#grid').data().kendoGrid.dataSource.sort({
+    field: 'Id',
+    dir: 'desc'
+});
                 // locate item in original datasource and update it
-                plotterData[getIndexById(e.data.Id)] = e.data;
-                ShowPointGraph();
+                var valueByIndex = getIndexById(e.data.Id);
+				var yField = $('#grid').data().kendoGrid.dataSource.data()[valueByIndex];
+                plotterData[valueByIndex].xValue = e.data.xValue;
+                plotterData[valueByIndex].yValue = e.data.xValue * 2;
+                yField.set('yValue',e.data.xValue * 2);
+                ShowPointGraph(plotterData);
                 // on success
                 e.success()
 
@@ -92,7 +104,7 @@ function ShowGrid() {
             destroy: function (e) {
                 // locate item in original datasource and remove it
                 plotterData.splice(getIndexById(e.data.Id), 1);
-                ShowPointGraph();
+                ShowPointGraph(plotterData);
                 // on success
                 e.success();
                 // on failure
@@ -107,11 +119,10 @@ function ShowGrid() {
         batch: false,
         schema: {
             model: {
-                id: "Id",
                 fields: {
                     Id: { editable: false, nullable: true },
-                    x_value: { type: "number", validation: { required: true, min: 1 } },
-                    y_value: { type: "number", validation: { required: true, min: 1 } }
+                    xValue: { type: "number", validation: { required: true, min: 1 } },
+                    yValue: {   type: "number", validation: {  min: 1 } }
                 }
             }
         }
@@ -122,8 +133,8 @@ function ShowGrid() {
         toolbar: ["create"],
         scrollable: true,
         columns: [
-              { field: "x_value", title: "X Value" },
-              { field: "y_value", title: "Y value" },
+              { field: "xValue", title: "X Value" },
+              { field: "yValue", title: "Y value" },
               { command: ["edit", "destroy"], title: "&nbsp;", width: "200px" }
         ],
         editable: "inline"
@@ -165,9 +176,9 @@ function ShowGraphic() {
         })
     });
 }
-function ShowPointGraph() {
+function ShowPointGraph(pointData) {
 
-    functionGraph.data = plotterData;
+    functionGraph.data = pointData;
     MG.data_graphic(functionGraph);
 }
 
