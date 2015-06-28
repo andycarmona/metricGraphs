@@ -1,2 +1,2 @@
 # metricGraphs
-Application using metris graphs library with D3 with some graphs examples, Kendo-Ui table CRUD operations to refresh data on some graphs, etc
+Application using MetricsGraphics.js library and D3.js. It just shows up some graphs examples and ineraction with Kendo-Ui table CRUD operations to refresh data on graphs..
