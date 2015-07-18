@@ -1,1 +1,15 @@
-# Empty CSS file for your own CSS
+body {
+
+  background-image: url(../svg/webmap.svg);
+      background-repeat: no-repeat;
+        background-size:cover;
+          
+}
+
+#headersvg {
+
+  background-image: url(../svg/header.svg);
+      background-repeat: no-repeat;
+        background-size:100% 100%;
+          
+}

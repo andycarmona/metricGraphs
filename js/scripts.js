@@ -39,6 +39,7 @@ var localDataSource = new kendo.data.DataSource({ data: plotterData });
 $(document).ready(function () {
     graphWidth = $(window).width();
     grapHeight = $(window).height();
+
     ShowGraphic();
     ShowPointGraph(plotterData);
     ShowPlotGraph();
@@ -47,6 +48,12 @@ $(document).ready(function () {
     ShowGrid();
 });
 
+function loadBackground() {
+    var s = Snap("#svgout");
+    var tux = Snap.load("/metrics/svg/webmap.svg", function (loadedFragment) {
+        s.append(loadedFragment);
+    });
+}
 
 
 function getIndexById(id) {
@@ -225,7 +232,7 @@ function ShowPlotGraph() {
             data: data,
             chart_type: 'point',
             width: graphWidth / widthConstant,
-            height: grapHeight,
+            height: grapHeight/3,
             left: 60,
             right: 10,
             least_squares: true,

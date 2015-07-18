@@ -16,27 +16,20 @@
     <link href="css/style.css" rel="stylesheet" />
 
 </head>
-<body>
+<body id="svgout">
 
     <div class="container-fluid">
         <div class="row">
+        
             <div class="col-md-12">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <p>Graphics examples</p>
-                    </li>
-                    <li class="dropdown pull-right">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Help<strong class="caret"></strong></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">Graphics description</a>
-                            </li>
-                            <li>
-                                <a href="#">Interesting links</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                <div class="row">
+                    <div class="col-md-12">
+           
+                         <h1>Graph data</h1>
+                        
+                    </div>
+                 
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="panel panel-default">
@@ -44,7 +37,7 @@
                                 <div id="grid"> </div>
                             </div>
                         </div>
-                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -52,43 +45,43 @@
                             </div>
                         </div>
                     </div>
-                    </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div id="histogramResult" class="result"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div id="normalResult"></div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div id="plotterResult" class="result"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div id="pointResult" class="result"></div>
-                                    </div>
-                                </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="histogramResult" class="result"></div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="normalResult"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="plotterResult" class="result"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div id="pointResult" class="result"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -97,7 +90,9 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.min.js"></script>
     <script src="js/metricsgraphics.min.js"></script>
+
     <script src="http://cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script>
+    <script src="js/snap.svg.js"></script>
     <script src="js/scripts.js"></script>
 </body>
 </html>
